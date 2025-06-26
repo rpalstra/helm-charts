@@ -159,6 +159,7 @@ data:
     prometheus.remote_write "cluster_metrics" {
       external_labels = {
         cluster = "{{ .Values.rosa.clusterName }}",
+        __replica__ = constants.hostname,
       }
       endpoint {
         name = "aws-prometheus"
