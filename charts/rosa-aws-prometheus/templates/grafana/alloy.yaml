@@ -14,6 +14,7 @@ data:
       level = "{{ .Values.alloy.logLevel }}"
     }
 
+{{- if .Values.alloy.clusterMetrics }}
     prometheus.scrape "cluster_metrics" {
       job_name     = "cluster-monitoring"
       forward_to = [prometheus.remote_write.cluster_metrics.receiver]
@@ -147,6 +148,7 @@ data:
         action = "keep"
       }
     }
+{{ end }}
 
     prometheus.receive_http "workload_metrics" {
       http {
